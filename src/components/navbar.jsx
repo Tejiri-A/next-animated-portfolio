@@ -1,0 +1,105 @@
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import NavLink from "@/components/navLink";
+
+const links = [
+  { url: "/", label: "Home" },
+  { url: "/about", label: "About" },
+  { url: "/contact", label: "Contact" },
+  { url: "/portfolio", label: "Portfolio" },
+];
+
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <nav
+      className={
+        "h-full flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48 text-xl"
+      }
+    >
+      {/*DESKTOP NAVIGATION LINKS*/}
+      <div className={"hidden md:flex gap-4 w-1/3"}>
+        {links.map((link) => (
+          <NavLink link={link}/>
+        ))}
+      </div>
+
+      {/*LOGO*/}
+      <div className={"md:hidden lg:flex xl:w-1/3 xl:justify-center"}>
+        <Link
+          href={"/"}
+          className={
+            "text-sm bg-black rounded-md p-1 font-semibold flex items-center justify-center"
+          }
+        >
+          <span className={"text-white mr-1"}>Lama</span>
+          <span
+            className={
+              "w-12 h-8 rounded bg-white text-black flex items-center justify-center"
+            }
+          >
+            Dev
+          </span>
+        </Link>
+      </div>
+
+      {/*SOCIAL MEDIA LINKS (tablet and desktop only)*/}
+      <div className={"hidden md:flex gap-4 w-1/3 justify-end"}>
+        <Link href={"https://github.com/Tejiri-A"} target={"_blank"}>
+          <Image src={"/github.png"} alt={""} width={24} height={24} />
+        </Link>
+        <Link href={"#"} target={"_blank"}>
+          <Image src={"/github.png"} alt={""} width={24} height={24} />
+        </Link>
+        <Link href={"#"} target={"_blank"}>
+          <Image src={"/dribbble.png"} alt={""} width={24} height={24} />
+        </Link>
+        <Link href={"#"} target={"_blank"}>
+          <Image src={"/instagram.png"} alt={""} width={24} height={24} />
+        </Link>
+        <Link href={"#"} target={"_blank"}>
+          <Image src={"/facebook.png"} alt={""} width={24} height={24} />
+        </Link>
+        <Link href={"#"} target={"_blank"}>
+          <Image src={"/linkedin.png"} alt={""} width={24} height={24} />
+        </Link>
+      </div>
+
+      {/*RESPONSIVE MENU*/}
+      <div className={"md:hidden"}>
+        <button
+          className={"w-10 h-8 flex flex-col justify-between z-50 relative "}
+          type={"button"}
+          aria-label={isOpen ? "close menu" : "open menu"}
+          aria-expanded={isOpen ? "true" : "false"}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-controls={"menu"}
+        >
+          <div className={"w-10 h-1 rounded bg-white"}></div>
+          <div className={"w-10 h-1 rounded bg-white"}></div>
+          <div className={"w-10 h-1 rounded bg-white"}></div>
+        </button>
+
+        {/*  MENU LIST*/}
+        {isOpen ? (
+          <div
+            id={"menu"}
+            className={
+              "absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-8 text-4xl"
+            }
+          >
+            {links.map((link) => (
+              <Link href={link.url} key={link.label}>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
