@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavLink from "@/components/navLink";
+import { motion } from "motion/react";
 
 const links = [
   { url: "/", label: "Home" },
@@ -13,6 +14,59 @@ const links = [
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const topVariants = {
+    closed: {
+      rotate: 0,
+    },
+    opened: {
+      rotate: 45,
+      backgroundColor: "rgb(255,255,255)",
+    },
+  };
+  const centerVariants = {
+    closed: {
+      opacity: 1,
+    },
+    opened: {
+      opacity: 0,
+    },
+  };
+  const bottomVariants = {
+    closed: {
+      rotate: 0,
+    },
+    opened: {
+      rotate: -45,
+      backgroundColor: "rgb(255,255,255)",
+    },
+  };
+
+  const listVariants = {
+    closed: {
+      x: "100vw",
+    },
+    opened: {
+      x: 0,
+      transition: {
+        // parent animates first, then animates the children
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const listItemVariants = {
+    closed: {
+      x: -10,
+      opacity: 0,
+    },
+    opened: {
+      x: 0,
+      opacity: 1,
+    },
+  };
+
   return (
     <nav
       className={
@@ -22,7 +76,7 @@ function Navbar() {
       {/*DESKTOP NAVIGATION LINKS*/}
       <div className={"hidden md:flex gap-4 w-1/3"}>
         {links.map((link) => (
-          <NavLink link={link} key={link.label}/>
+          <NavLink link={link} key={link.label} />
         ))}
       </div>
 
@@ -77,25 +131,40 @@ function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           aria-controls={"menu"}
         >
-          <div className={"w-10 h-1 rounded bg-white"}></div>
-          <div className={"w-10 h-1 rounded bg-white"}></div>
-          <div className={"w-10 h-1 rounded bg-white"}></div>
+          <motion.div
+            animate={isOpen ? "opened" : "closed"}
+            variants={topVariants}
+            className={"w-10 h-1 rounded bg-black origin-left"}
+          ></motion.div>
+          <motion.div
+            animate={isOpen ? "opened" : "closed"}
+            variants={centerVariants}
+            className={"w-10 h-1 rounded bg-black"}
+          ></motion.div>
+          <motion.div
+            animate={isOpen ? "opened" : "closed"}
+            variants={bottomVariants}
+            className={"w-10 h-1 rounded bg-black origin-left"}
+          ></motion.div>
         </button>
 
         {/*  MENU LIST*/}
         {isOpen ? (
-          <div
+          <motion.div
             id={"menu"}
+            variants={listVariants}
+            initial="closed"
+            animate="opened"
             className={
-              "absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-8 text-4xl"
+              "absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-8 text-4xl z-40"
             }
           >
             {links.map((link) => (
-              <Link href={link.url} key={link.label}>
-                {link.label}
-              </Link>
+              <motion.div key={link.label} variants={listItemVariants}>
+                <Link href={link.url}>{link.label}</Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ) : null}
       </div>
     </nav>
