@@ -22,7 +22,7 @@ function Navbar() {
       {/*DESKTOP NAVIGATION LINKS*/}
       <div className={"hidden md:flex gap-4 w-1/3"}>
         {links.map((link) => (
-          <NavLink link={link}/>
+          <NavLink link={link} key={link.label}/>
         ))}
       </div>
 
@@ -51,7 +51,7 @@ function Navbar() {
           <Image src={"/github.png"} alt={""} width={24} height={24} />
         </Link>
         <Link href={"#"} target={"_blank"}>
-          <Image src={"/github.png"} alt={""} width={24} height={24} />
+          <Image src={"/pinterest.png"} alt={""} width={24} height={24} />
         </Link>
         <Link href={"#"} target={"_blank"}>
           <Image src={"/dribbble.png"} alt={""} width={24} height={24} />
