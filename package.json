@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@sglara/cn": "^1.0.0",
     "motion": "^12.34.1",
     "next": "14.1.0",

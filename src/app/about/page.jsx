@@ -34,7 +34,7 @@ function AboutPage() {
             <h1 className={"font-bold text-2xl"}>BIOGRAPHY</h1>
             {/*BIO DESCRIPTION*/}
             <p className={"text-lg"}>
-              I'm a creative developer and designer with a passion for building
+              I&apos; a creative developer and designer with a passion for building
               intuitive and visually stunning digital experiences. With
               expertise in modern web technologies and a keen eye for design, I
               transform ideas into reality. My journey in tech has been driven
@@ -43,8 +43,8 @@ function AboutPage() {
             </p>
             {/*BIO QUOTE*/}
             <span className={"italic"}>
-              "Design is not just what it looks like and feels like. Design is
-              how it works."
+              &ldquo;Design is not just what it looks like and feels like. Design is
+              how it works.&rdquo;
             </span>
             {/*BIO SIGN SVG*/}
             <div className={"self-end"}>
